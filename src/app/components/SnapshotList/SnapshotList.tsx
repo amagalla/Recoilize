@@ -8,11 +8,9 @@ interface SnapshotsListProps {
   timeTravelFunc: (index: number) => void;
 }
 
-const SnapshotsList: React.FC<SnapshotsListProps> = ({
-  timeTravelFunc,
-}) => {
+const SnapshotsList: React.FC<SnapshotsListProps> = ({timeTravelFunc}) => {
   const {snapshotHistory} = useContext(snapshotHistoryContext);
-  let snapshotHistoryLength = snapshotHistory.length
+  let snapshotHistoryLength = snapshotHistory.length;
   const {selected} = useContext(selectedContext);
   const {filter} = useContext(filterContext);
   const {renderIndex, setRenderIndex} = useContext(renderIndexContext);
@@ -32,10 +30,8 @@ const SnapshotsList: React.FC<SnapshotsListProps> = ({
   const snapshotDivs: JSX.Element[] = [];
   // iterate the same length of our snapshotHistory
   for (let i = 0; i < snapshotHistoryLength; i++) {
-    
     // filterFunc will return false if there is no change to state
     const filterFunc = (): boolean => {
-    
       // don't use the counter for this, not reliable
       if (i === 0) {
         return true;
@@ -53,24 +49,25 @@ const SnapshotsList: React.FC<SnapshotsListProps> = ({
       return false;
     };
     const x: boolean = filterFunc();
-    
+
     if (x === false) {
       continue;
     }
-    
-    // renderTime is set equal to the actualDuration. If i is zero then we are obtaining actualDuration from the very first snapshot in snapshotHistory. This is to avoid having undefined filter elements since there will be no difference between snapshot at the first instance. 
+
+    // renderTime is set equal to the actualDuration. If i is zero then we are obtaining actualDuration from the very first snapshot in snapshotHistory. This is to avoid having undefined filter elements since there will be no difference between snapshot at the first instance.
     let renderTime: number;
-    if(i === 0) {
+    if (i === 0) {
       renderTime = snapshotHistory[0].componentAtomTree.treeBaseDuration;
-    } 
+    }
     //Checks to see if the actualDuration within filter is an array. If it is an array then the 2nd value in the array is the new actualDuration.
-    else if (Array.isArray(filter[i].componentAtomTree.actualDuration)) {      
-      renderTime = (filter[i].componentAtomTree.treeBaseDuration as number[])[1];
+    else if (Array.isArray(filter[i].componentAtomTree.actualDuration)) {
+      renderTime = (filter[i].componentAtomTree
+        .treeBaseDuration as number[])[1];
     } else {
       renderTime = filter[i].componentAtomTree.treeBaseDuration as number;
     }
 
-    // Push a div container to snapshotDivs array only if there was a change to state. 
+    // Push a div container to snapshotDivs array only if there was a change to state.
     // The div container will contain renderTimes evaluated above.
     snapshotDivs.push(
       <div
@@ -86,13 +83,13 @@ const SnapshotsList: React.FC<SnapshotsListProps> = ({
           setRenderIndex(i);
         }}>
         {/* <li>{i}</li> */}
-        <li>{`${Math.round(renderTime*100)/100}ms`}</li>
+        <li>{`${Math.round(renderTime * 100) / 100}ms`}</li>
         <button
           className="timeTravelButton"
           style={
-          renderIndex === i
-            ? {color: '#E6E6E6', backgroundColor: '#212121'}
-            : {}
+            renderIndex === i
+              ? {color: '#E6E6E6', backgroundColor: '#212121'}
+              : {}
           }
           onClick={() => {
             timeTravelFunc(i);
@@ -107,7 +104,7 @@ const SnapshotsList: React.FC<SnapshotsListProps> = ({
   an atom/selector from the Atom and Selector Filter in the Settings tab
   */
   // render the array of snapshots divs generated above
-  
+
   return (
     <div className="SnapshotsList">
       <div>{snapshotDivs}</div>

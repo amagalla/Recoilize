@@ -1,8 +1,10 @@
 import React, {useState, useContext} from 'react';
-import { throttleDisplayContext } from '../../Containers/VisualContainer';
+import {throttleDisplayContext} from '../../Containers/VisualContainer';
 
 const ThrottleSettings: React.FC = () => {
-  const {throttleDisplay, setThrottleDisplay} = useContext(throttleDisplayContext);
+  const {throttleDisplay, setThrottleDisplay} = useContext(
+    throttleDisplayContext,
+  );
   const [throttleNum, setThrottleNum] = useState<string>('');
 
   // onClick function for reset button. 70ms is the default throttle

@@ -5,7 +5,7 @@ import {snapshotHistoryContext} from '../components/App';
 
 interface RenderIndexContext {
   renderIndex: number;
-  setRenderIndex: React.Dispatch<React.SetStateAction<number>>
+  setRenderIndex: React.Dispatch<React.SetStateAction<number>>;
 }
 
 export const renderIndexContext = createContext<RenderIndexContext>(null);
@@ -23,23 +23,25 @@ const MainContainer: React.FC = () => {
   // useEffect for renderIndex
   // whenever snapshotHistory changes, update renderIndex
   useEffect(() => {
-
     setRenderIndex(snapshotHistory.length - 1);
-
   }, [snapshotHistory]);
 
   // render containers passing necessary props
   return (
     <div className="MainContainer">
-    <renderIndexContext.Provider value={{renderIndex, setRenderIndex}}>
-      <SnapshotsContainer />
+      <renderIndexContext.Provider value={{renderIndex, setRenderIndex}}>
+        <SnapshotsContainer />
       </renderIndexContext.Provider>
 
       <VisualContainer
         // snapshot at index [renderIndex -1]
         previousSnapshot={snapshotHistory[renderIndex - 1]}
         // snapshot at index [renderIndex]
-        currentSnapshot={(snapshotHistory[renderIndex]) ? snapshotHistory[renderIndex] : snapshotHistory[0]}
+        currentSnapshot={
+          snapshotHistory[renderIndex]
+            ? snapshotHistory[renderIndex]
+            : snapshotHistory[0]
+        }
       />
     </div>
   );

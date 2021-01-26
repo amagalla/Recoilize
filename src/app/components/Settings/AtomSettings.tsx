@@ -1,7 +1,7 @@
-import React, { useContext } from 'react';
+import React, {useContext} from 'react';
 const {Multiselect} = require('multiselect-react-dropdown');
 import {selectedTypes} from '../../../types';
-import { selectedContext, snapshotHistoryContext } from '../App';
+import {selectedContext, snapshotHistoryContext} from '../App';
 
 const AtomSettings: React.FC = () => {
   const {snapshotHistory} = useContext(snapshotHistoryContext);

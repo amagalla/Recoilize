@@ -27,4 +27,4 @@ describe('atom settings properly rendering', () => {
     const root = document.createElement('div');
     ReactDOM.render(<Multiselect />, root);
   });
-})
+});

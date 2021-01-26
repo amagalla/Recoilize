@@ -155,7 +155,8 @@ const VisualContainer: React.FC<VisualContainerProps> = ({
     // settings tab that doesn't want to be in quotes because too cool for school
     Settings: (
       <checkedContext.Provider value={{checked, setChecked}}>
-        <throttleDisplayContext.Provider value={{throttleDisplay, setThrottleDisplay}}>
+        <throttleDisplayContext.Provider
+          value={{throttleDisplay, setThrottleDisplay}}>
           <Settings />
         </throttleDisplayContext.Provider>
       </checkedContext.Provider>
@@ -175,6 +176,8 @@ const VisualContainer: React.FC<VisualContainerProps> = ({
 };
 
 export const checkedContext = createContext<CheckedContext>(null);
-export const throttleDisplayContext = createContext<ThrottleDisplayContext>(null);
+export const throttleDisplayContext = createContext<ThrottleDisplayContext>(
+  null,
+);
 export const zoomStateContext = createContext<ZoomStateContext>(null);
 export default VisualContainer;
